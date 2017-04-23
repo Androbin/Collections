@@ -48,14 +48,13 @@ public class ArrayIndexMap3D<E extends Indexable> implements IndexMap3D<E>
 	@ Override
 	public void load( final File file ) throws IOException
 	{
-		final Reader reader = new BufferedReader( new FileReader( file ) );
-		
-		for ( int i = 0; i < indices.length; i++ )
+		try ( final Reader reader = new BufferedReader( new FileReader( file ) ) )
 		{
-			indices[ i ] = reader.read();
+			for ( int i = 0; i < indices.length; i++ )
+			{
+				indices[ i ] = reader.read();
+			}
 		}
-		
-		reader.close();
 	}
 	
 	@ Override
@@ -68,15 +67,13 @@ public class ArrayIndexMap3D<E extends Indexable> implements IndexMap3D<E>
 	@ Override
 	public void save( final File file ) throws IOException
 	{
-		final Writer writer = new BufferedWriter( new FileWriter( file ) );
-		
-		for ( int i = 0; i < indices.length; i++ )
+		try ( final Writer writer = new BufferedWriter( new FileWriter( file ) ) )
 		{
-			writer.write( indices[ i ] );
+			for ( int i = 0; i < indices.length; i++ )
+			{
+				writer.write( indices[ i ] );
+			}
 		}
-		
-		writer.flush();
-		writer.close();
 	}
 	
 	@ Override

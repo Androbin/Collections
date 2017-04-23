@@ -53,24 +53,23 @@ public class ArrayIntMap3D implements IntMap3D
 	@ Override
 	public void load( final File file ) throws IOException
 	{
-		final Reader reader = new BufferedReader( new FileReader( file ) );
-		
-		for ( int i = 0; i < elements.length; i++ )
+		try ( final Reader reader = new BufferedReader( new FileReader( file ) ) )
 		{
-			final int b = reader.read();
-			
-			if ( b > 0 )
+			for ( int i = 0; i < elements.length; i++ )
 			{
-				elements[ i ] = sign( b - 1 );
-				existance[ i ] = true;
-			}
-			else
-			{
-				existance[ i ] = false;
+				final int b = reader.read();
+				
+				if ( b > 0 )
+				{
+					elements[ i ] = sign( b - 1 );
+					existance[ i ] = true;
+				}
+				else
+				{
+					existance[ i ] = false;
+				}
 			}
 		}
-		
-		reader.close();
 	}
 	
 	@ Override
@@ -83,15 +82,13 @@ public class ArrayIntMap3D implements IntMap3D
 	@ Override
 	public void save( final File file ) throws IOException
 	{
-		final Writer writer = new BufferedWriter( new FileWriter( file ) );
-		
-		for ( int i = 0; i < elements.length; i++ )
+		try ( final Writer writer = new BufferedWriter( new FileWriter( file ) ) )
 		{
-			writer.write( existance[ i ] ? unsign( elements[ i ] ) + 1 : 0 );
+			for ( int i = 0; i < elements.length; i++ )
+			{
+				writer.write( existance[ i ] ? unsign( elements[ i ] ) + 1 : 0 );
+			}
 		}
-		
-		writer.flush();
-		writer.close();
 	}
 	
 	@ Override
