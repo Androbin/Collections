@@ -5,7 +5,6 @@ import static de.androbin.math.util.ints.IntMathUtil.*;
 import java.util.*;
 import java.util.function.*;
 
-@ SuppressWarnings( "unchecked" )
 public final class PriorityQueue<E extends Comparable<E>> implements Queue<E> {
   private Object[] nodes;
   private int count;
@@ -35,7 +34,9 @@ public final class PriorityQueue<E extends Comparable<E>> implements Queue<E> {
   }
   
   private E getNode( final int index ) {
-    return (E) nodes[ shiftDown( pointer + index, nodes.length ) ];
+    @ SuppressWarnings( "unchecked" )
+    final E node = (E) nodes[ shiftDown( pointer + index, nodes.length ) ];
+    return node;
   }
   
   public int indexOf( final E e ) {
@@ -72,7 +73,7 @@ public final class PriorityQueue<E extends Comparable<E>> implements Queue<E> {
       final int m = ( l + r ) / 2;
       final int c = e.compareTo( getNode( m ) );
       
-      /**/ if ( c == 0 ) {
+      if ( c == 0 ) {
         return m + 1;
       } else if ( l >= r ) {
         return c > 0 ? m + 1 : m;
@@ -99,7 +100,7 @@ public final class PriorityQueue<E extends Comparable<E>> implements Queue<E> {
       m = ( l + r ) / 2;
       c = e.compareTo( getNode( m ) );
       
-      /**/ if ( c == 0 ) {
+      if ( c == 0 ) {
         return m;
       } else if ( l >= r ) {
         return -1;
@@ -179,7 +180,9 @@ public final class PriorityQueue<E extends Comparable<E>> implements Queue<E> {
   
   @ Override
   public boolean contains( final Object o ) {
-    return indexOf( (E) o ) != -1;
+    @ SuppressWarnings( "unchecked" )
+    final int index = indexOf( (E) o );
+    return index != -1;
   }
   
   @ Override
@@ -225,6 +228,7 @@ public final class PriorityQueue<E extends Comparable<E>> implements Queue<E> {
   
   @ Override
   public boolean remove( final Object o ) {
+    @ SuppressWarnings( "unchecked" )
     final int index = indexOf( (E) o );
     
     if ( index == -1 ) {
@@ -242,13 +246,13 @@ public final class PriorityQueue<E extends Comparable<E>> implements Queue<E> {
   
   @ Override
   public boolean addAll( final Collection< ? extends E> c ) {
-    // prevent short circuting
+    // TODO prevent short circuting
     return c.parallelStream().map( this::add ).reduce( ( a, b ) -> a || b ).get();
   }
   
   @ Override
   public boolean removeAll( final Collection< ? > c ) {
-    // prevent short circuting
+    // TODO prevent short circuting
     return c.parallelStream().map( this::remove ).reduce( ( a, b ) -> a || b ).get();
   }
   
@@ -299,9 +303,11 @@ public final class PriorityQueue<E extends Comparable<E>> implements Queue<E> {
   
   @ Override
   public E poll() {
-    count--;
+    @ SuppressWarnings( "unchecked" )
     final E node = (E) nodes[ pointer ];
+    
     pointer = shiftDown( pointer + 1, nodes.length );
+    count--;
     return node;
   }
   
@@ -312,6 +318,8 @@ public final class PriorityQueue<E extends Comparable<E>> implements Queue<E> {
   
   @ Override
   public E peek() {
-    return (E) nodes[ pointer ];
+    @ SuppressWarnings( "unchecked" )
+    final E node = (E) nodes[ pointer ];
+    return node;
   }
 }

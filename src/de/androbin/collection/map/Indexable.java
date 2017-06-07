@@ -1,6 +1,5 @@
 package de.androbin.collection.map;
 
-public interface Indexable
-{
-	int getIndex();
+public interface Indexable {
+  int getIndex();
 }

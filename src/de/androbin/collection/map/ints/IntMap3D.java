@@ -2,20 +2,18 @@ package de.androbin.collection.map.ints;
 
 import java.io.*;
 
-public interface IntMap3D
-{
-	int getElementAt( final int x, final int y, final int z );
-	
-	boolean isElementAt( final int x, final int y, final int z );
-	
-	void load( final File file ) throws IOException;
-	
-	boolean removeElementAt( final int x, final int y, final int z );
-	
-	void save( final File file ) throws IOException;
-	
-	default boolean setElementAt( final int element, final int x, final int y, final int z )
-	{
-		return false;
-	}
+public interface IntMap3D {
+  int getElementAt( int x, int y, int z );
+  
+  boolean isElementAt( int x, int y, int z );
+  
+  void load( File file ) throws IOException;
+  
+  boolean removeElementAt( int x, int y, int z );
+  
+  void save( File file ) throws IOException;
+  
+  default boolean setElementAt( int element, int x, int y, int z ) {
+    return false;
+  }
 }
