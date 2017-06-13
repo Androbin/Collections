@@ -1,6 +1,6 @@
 package de.androbin.collection.map;
 
-import de.androbin.function.*;
+import de.androbin.func.*;
 
 public interface Map2D<E> extends BiIntFunction<E> {
   @ Override

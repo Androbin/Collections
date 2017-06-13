@@ -1,6 +1,6 @@
 package de.androbin.collection.map;
 
-import de.androbin.function.*;
+import de.androbin.func.*;
 
 public interface Map3D<E> extends TriIntFunction<E> {
   @ Override
