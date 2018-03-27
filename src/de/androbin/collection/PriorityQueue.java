@@ -127,11 +127,17 @@ public final class PriorityQueue<E extends Comparable<E>> extends AbstractQueue<
     final E node = nodes.get( index );
     final int insertIndex = indexOfInsertion( node );
     
-    nodes.move( index, insertIndex );
+    if ( index < insertIndex ) {
+      nodes.move( index, insertIndex - 1 );
+    } else {
+      nodes.move( index, insertIndex );
+    }
   }
   
-  public void reorder( final E element ) {
-    reorder( indexOf( element ) );
+  public void reorder( final E element, final Runnable action ) {
+    final int index = indexOf( element );
+    action.run();
+    reorder( index );
   }
   
   @ Override
