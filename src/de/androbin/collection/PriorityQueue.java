@@ -10,7 +10,11 @@ public final class PriorityQueue<E extends Comparable<E>> extends AbstractQueue<
   }
   
   public PriorityQueue( final int initialCapacity ) {
-    this.nodes = new CyclicArrayList<>( initialCapacity );
+    nodes = new CyclicArrayList<>( initialCapacity );
+  }
+  
+  public PriorityQueue( final PriorityQueue<E> queue ) {
+    nodes = new CyclicArrayList<>( queue.nodes );
   }
   
   @ Override

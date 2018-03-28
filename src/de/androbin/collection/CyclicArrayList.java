@@ -14,7 +14,13 @@ public final class CyclicArrayList<E> extends AbstractList<E> {
   }
   
   public CyclicArrayList( final int initialCapacity ) {
-    this.array = new Object[ initialCapacity ];
+    array = new Object[ initialCapacity ];
+  }
+  
+  public CyclicArrayList( final CyclicArrayList<E> list ) {
+    array = Arrays.copyOf( list.array, list.count );
+    count = list.count;
+    pointer = list.pointer;
   }
   
   @ Override
