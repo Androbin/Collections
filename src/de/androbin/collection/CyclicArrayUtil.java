@@ -67,7 +67,7 @@ public final class CyclicArrayUtil {
           
           // left to right
           System.arraycopy( array, srcPos, array, destPos, splitSrcLeft );
-          System.arraycopy( array, srcPos + splitSrcLeft, array, 0, splitDestLeft - splitSrcLeft );
+          System.arraycopy( array, 0, array, destPos + splitSrcLeft, splitDestLeft - splitSrcLeft );
           System.arraycopy( array, splitSrcRight - splitDestRight, array, 0, splitDestRight );
         }
       }
